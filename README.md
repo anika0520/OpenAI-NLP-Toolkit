@@ -47,40 +47,43 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> mo
   <li>OpenAI API key — <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer">Get your API key here</a></li>
 </ul>
 
-### Setup
-
+<h2>Setup</h2>
+<pre><code>
 git clone https://github.com/yourusername/gpt3-nlp-tasks.git
 cd gpt3-nlp-tasks
 pip install -r requirements.txt
-Create a <code>.env</code> file in the root folder and add your OpenAI API key:
+</code></pre>
 
-ini
+<p>Create a <code>.env</code> file in the root folder and add your OpenAI API key:</p>
+
+<pre><code class="language-ini">
 OPENAI_API_KEY=your_openai_api_key_here
+</code></pre>
 
-Run the script
-python gpt3_nlp_tasks.py
+<h2>Run the script</h2>
+<pre><code>python gpt3_nlp_tasks.py</code></pre>
 
-Usage
-Inside the script, you will find example functions for each NLP task. Customize the GPT-3 prompts and parameters to suit your specific use case.
+<h2>Usage</h2>
+<p>Inside the script, you will find example functions for each NLP task. Customize the GPT-3 prompts and parameters to suit your specific use case.</p>
 
-Important Notes
-🔐 Keep your API key secure and never commit your .env file to public repositories.
+<h2>Important Notes</h2>
+<ul>
+  <li>🔐 Keep your API key secure and <strong>never commit your <code>.env</code> file</strong> to public repositories.</li>
+  <li>⚙️ Adjust the <code>temperature</code> and <code>max_tokens</code> parameters to balance creativity and output length.</li>
+</ul>
 
-⚙️ Adjust the temperature and max_tokens parameters to balance creativity and output length.
+<h2>Contribution</h2>
+<p>Feel free to fork this repository, improve the scripts, and open pull requests. Your feedback and suggestions are highly appreciated!</p>
 
-Contribution
-Feel free to fork this repository, improve the scripts, and open pull requests. Your feedback and suggestions are highly appreciated!
+<h2>License</h2>
+<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
 
-License
-This project is licensed under the MIT License.
+<h2>Acknowledgements</h2>
+<p>Thanks to <a href="https://openai.com/">OpenAI</a> for providing the powerful GPT-3 API.</p>
+<p>Inspired by Infosys’ initiatives on AI and Automation.</p>
 
-Acknowledgements
-Thanks to OpenAI for providing the powerful GPT-3 API.
+<h2>About the Author</h2>
+<p>👨‍🎓 <strong>Anika Gangwar</strong> — 3rd Year B.Tech CSE Student</p>
+<p>📧 <a href="mailto:anikagangwar2005@gmail.com">anikagangwar2005@gmail.com</a> | 🔗 <a href="https://www.linkedin.com/in/anika-gangwar-3a10772b1/">LinkedIn</a> | 🐙 <a href="https://github.com/annahunn20">GitHub</a></p>
 
-Inspired by Infosys’ initiatives on AI and Automation.
-
-About the Author
-👨‍🎓 Anika Gangwar — 3rd Year B.Tech CSE Student
-📧 anikagangwar2005@gmail.com | 🔗 https://www.linkedin.com/in/anika-gangwar-3a10772b1/ | 🐙 https://github.com/annahunn20
-
-<p align="center"><em>Empowering automation and AI for the next generation of developers!</em></p> ```
+<p style="text-align:center;"><em>Empowering automation and AI for the next generation of developers!</em></p>
