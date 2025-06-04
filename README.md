@@ -1,8 +1,9 @@
 # GPT-3 NLP Tasks Mini Project
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png" alt="OpenAI Logo" width="300"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png" alt="OpenAI Logo" width="300" />
 </p>
+
 
 ---
 
