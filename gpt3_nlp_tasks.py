@@ -79,8 +79,7 @@ if __name__ == "__main__":
     print("\n=== Visualization Code ===")
     print(generate_code_for_visualization())
     
-    experience = ("I am a 3rd year BTech CSE student skilled in Python, "
-                  "machine learning, data analysis, and software development.")
+    experience = ("I am a 3rd year B.Tech CSE student, proficient in Java and Python (my main programming language), with a growing interest in Machine Learning and Web Development.")
     print("\n=== Resume Summary ===")
     print(generate_resume(experience))
     
