@@ -1,9 +1,8 @@
 # GPT-3 NLP Tasks Mini Project
 
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png" alt="OpenAI Logo" width="300" />
+  <img src="banner.png" alt="GPT-3 NLP Tasks Banner" width="80%">
 </p>
-
 
 ---
 
@@ -50,7 +49,7 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> mo
 
 <h2>Setup</h2>
 <pre><code>
-git clone https://github.com/yourusername/gpt3-nlp-tasks.git
+git clone https://github.com/annahunn20/gpt3-nlp-tasks.git
 cd gpt3-nlp-tasks
 pip install -r requirements.txt
 </code></pre>
