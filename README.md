@@ -1,4 +1,4 @@
-# GPT-3 NLP Tasks Mini Project
+# GPT-3/4 NLP & Code Tasks Mini Project
 
 <p align="center">
   <img src="banner.png" alt="GPT-3 NLP Tasks Banner" width="80%">
@@ -9,7 +9,7 @@
 ## Overview
 
 <p>
-This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> model to automate various <strong>Natural Language Processing (NLP)</strong> tasks. Using GPT-3’s API, this project generates Python code for common data science tasks, creates resumes from experience paragraphs, formulates interview questions, and summarizes meeting notes — all with minimal manual effort!
+This mini project demonstrates the power of OpenAI’s <strong>GPT-4</strong> model to automate a variety of <strong>Natural Language Processing (NLP)</strong> and data science tasks. Using the OpenAI API, this project generates Python code, creates resumes from experience paragraphs, formulates interview questions, and summarizes meeting notes — all with minimal manual effort — via an <strong>interactive Streamlit web interface</strong>!
 </p>
 
 ---
@@ -17,11 +17,12 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> mo
 ## Features
 
 <ul>
-  <li>💻 Generate Python code for <strong>Exploratory Data Analysis (EDA)</strong> using <code>pandas</code></li>
+  <li>💻 Generate Python code for <strong>Exploratory Data Analysis (EDA)</strong> using <code>pandas</code> and <code>matplotlib</code></li>
   <li>📊 Create data visualizations with <code>matplotlib</code> and <code>seaborn</code></li>
-  <li>📝 Convert plain text about your skills & experience into a professional resume</li>
+  <li>📝 Convert plain text about your skills & experience into a professional resume summary</li>
   <li>❓ Automatically generate programming interview questions in your preferred language</li>
   <li>🗒️ Summarize meeting notes into concise action points</li>
+  <li>🌐 Interactive Streamlit web UI, works locally or on Google Colab with ngrok</li>
 </ul>
 
 ---
@@ -31,8 +32,13 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> mo
 <table>
   <tr>
     <td>🐍 Python 3.x</td>
-    <td>🤖 OpenAI GPT-3 API (Davinci engine)</td>
-    <td>🔐 dotenv for environment variable management</td>
+    <td>🤖 OpenAI GPT-4 / GPT-4o-mini API</td>
+    <td>🔐 python-dotenv for environment variable management</td>
+  </tr>
+  <tr>
+    <td>📊 pandas, matplotlib, seaborn</td>
+    <td>🌐 Streamlit</td>
+    <td>🔗 pyngrok (Colab hosting)</td>
   </tr>
 </table>
 
@@ -45,9 +51,11 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-3</strong> mo
 <ul>
   <li>Python 3.6+ installed</li>
   <li>OpenAI API key — <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noopener noreferrer">Get your API key here</a></li>
+  <li>ngrok AuthToken (for running on Google Colab) — <a href="https://dashboard.ngrok.com/get-started/your-authtoken" target="_blank" rel="noopener noreferrer">Get your ngrok AuthToken</a></li>
 </ul>
 
-<h2>Setup</h2>
+### Setup
+
 <pre><code>
 git clone https://github.com/annahunn20/gpt3-nlp-tasks.git
 cd gpt3-nlp-tasks
@@ -60,30 +68,85 @@ pip install -r requirements.txt
 OPENAI_API_KEY=your_openai_api_key_here
 </code></pre>
 
-<h2>Run the script</h2>
-<pre><code>python gpt3_nlp_tasks.py</code></pre>
+---
 
-<h2>Usage</h2>
-<p>Inside the script, you will find example functions for each NLP task. Customize the GPT-3 prompts and parameters to suit your specific use case.</p>
+### Run Locally
 
-<h2>Important Notes</h2>
+<pre><code>streamlit run app.py</code></pre>
+
+---
+
+### Run on Google Colab
+
+<ol>
+  <li>Install dependencies:
+<pre><code>!pip install openai streamlit pyngrok python-dotenv</code></pre>
+  </li>
+  <li>Set your OpenAI API key:
+<pre><code>import os
+os.environ["OPENAI_API_KEY"] = "YOUR_REAL_OPENAI_KEY"</code></pre>
+  </li>
+  <li>Configure ngrok auth token:
+<pre><code>from pyngrok import ngrok
+!ngrok config add-authtoken "YOUR_NGROK_AUTH_TOKEN"</code></pre>
+  </li>
+  <li>Run the Streamlit app and get a public URL:
+<pre><code>!streamlit run app.py &>/dev/null &
+url = ngrok.connect(8501)
+print("Streamlit App URL:", url)</code></pre>
+  </li>
+</ol>
+
+<p>Click the generated URL to open the interactive app.</p>
+
+---
+
+## Usage
+
 <ul>
-  <li>🔐 Keep your API key secure and <strong>never commit your <code>.env</code> file</strong> to public repositories.</li>
-  <li>⚙️ Adjust the <code>temperature</code> and <code>max_tokens</code> parameters to balance creativity and output length.</li>
+  <li>Select a task from the sidebar in the Streamlit app.</li>
+  <li>Provide input where required (paragraphs, notes, or parameters).</li>
+  <li>Click "Generate" to get results instantly.</li>
+  <li>Optionally, download the outputs (code as <code>.py</code>, summaries as <code>.txt</code>).</li>
 </ul>
 
-<h2>Contribution</h2>
-<p>Feel free to fork this repository, improve the scripts, and open pull requests. Your feedback and suggestions are highly appreciated!</p>
+---
 
-<h2>License</h2>
+## Important Notes
+
+<ul>
+  <li>🔐 Keep your API key secure. <strong>Never commit your <code>.env</code> file</strong> to public repositories.</li>
+  <li>⚙️ Adjust <code>temperature</code> and <code>max_tokens</code> in the script for creativity vs length.</li>
+  <li>💡 Streamlit + ngrok is intended for development/demo purposes. For production, deploy on Streamlit Cloud or Hugging Face Spaces.</li>
+</ul>
+
+---
+
+## Contribution
+
+<p>Feel free to fork this repository, improve the scripts, or add new AI tasks. Pull requests and suggestions are highly appreciated!</p>
+
+---
+
+## License
+
 <p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
 
-<h2>Acknowledgements</h2>
-<p>Thanks to <a href="https://openai.com/">OpenAI</a> for providing the powerful GPT-3 API.</p>
+---
+
+## Acknowledgements
+
+<p>Thanks to <a href="https://openai.com/">OpenAI</a> for providing powerful GPT APIs.</p>
 <p>Inspired by Infosys’ initiatives on AI and Automation.</p>
 
-<h2>About the Author</h2>
-<p>👨‍🎓 <strong>Anika Gangwar</strong> — 3rd Year B.Tech CSE Student</p>
-<p>📧 <a href="mailto:anikagangwar2005@gmail.com">anikagangwar2005@gmail.com</a> | 🔗 <a href="https://www.linkedin.com/in/anika-gangwar-3a10772b1/">LinkedIn</a> | 🐙 <a href="https://github.com/annahunn20">GitHub</a></p>
+---
+
+## About the Author
+
+<p>👩‍🎓 <strong>Anika Gangwar</strong> — 3rd Year B.Tech CSE Student</p>
+<p>📧 <a href="mailto:anikagangwar2005@gmail.com">anikagangwar2005@gmail.com</a> | 🔗 <a href="https://www.linkedin.com/in/anika-gangwar-3a10772b1/">LinkedIn</a> | 🐙 <a href="https://github.com/anika0520">GitHub</a></p>
 
 <p style="text-align:center;"><em>Empowering automation and AI for the next generation of developers!</em></p>
+
+---
+
