@@ -57,7 +57,7 @@ This mini project demonstrates the power of OpenAI’s <strong>GPT-4</strong> mo
 ### Setup
 
 <pre><code>
-git clone https://github.com/annahunn20/gpt3-nlp-tasks.git
+git clone https://github.com/anika0520/gpt3-nlp-tasks.git
 cd gpt3-nlp-tasks
 pip install -r requirements.txt
 </code></pre>
