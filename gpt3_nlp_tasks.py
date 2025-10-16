@@ -1,97 +1,114 @@
+# app.py
 import os
 import openai
+import streamlit as st
 from dotenv import load_dotenv
-print("API Key:", os.getenv("OPENAI_API_KEY"))
+
+# Load API key from .env
 load_dotenv()
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def generate_code_for_eda():
+# -----------------------------
+# Helper function to call GPT
+# -----------------------------
+def chat_with_ai(role, prompt, temperature=0.4, tokens=400):
+    """Generic function to interact with GPT-4/3.5 via OpenAI API"""
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",  # or "gpt-4"
+        model="gpt-4o-mini",  # can switch to gpt-3.5-turbo if needed
         messages=[
-            {"role": "system", "content": "You are a Python expert."},
-            {"role": "user", "content": "Write python code for Exploratory Data Analysis (EDA) using pandas."}
+            {"role": "system", "content": role},
+            {"role": "user", "content": prompt}
         ],
-        temperature=0.3,
-        max_tokens=300
+        temperature=temperature,
+        max_tokens=tokens
     )
     return response.choices[0].message.content.strip()
 
-# Test
-print(generate_code_for_eda())
+# -----------------------------
+# Streamlit UI
+# -----------------------------
+st.set_page_config(page_title="AI Code & Content Generator", page_icon="🤖", layout="centered")
+st.title("🤖 AI Code & Content Generator")
+st.caption("Powered by OpenAI | Created by Anika")
 
-def generate_code_for_visualization():
-    prompt = (
-        "Write python code for data visualization using matplotlib and seaborn libraries.\n\n"
-        "import matplotlib.pyplot as plt\nimport seaborn as sns\n"
-    )
-    response = openai.Completion.create(
-        engine="davinci-codex",
-        prompt=prompt,
-        temperature=0.3,
-        max_tokens=150,
-        stop=["#"]
-    )
-    return response.choices[0].text.strip()
+# Sidebar options
+option = st.sidebar.selectbox(
+    "Choose a Task",
+    [
+        "Generate EDA Code",
+        "Generate Visualization Code",
+        "Generate Resume Summary",
+        "Generate Interview Questions",
+        "Generate Meeting Summary"
+    ]
+)
 
-def generate_resume(paragraph):
-    prompt = (
-        f"Generate a professional resume summary from this experience and skillset paragraph:\n\"\"\"\n{paragraph}\n\"\"\"\n\nResume Summary:"
-    )
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.5,
-        max_tokens=150,
-        stop=["\n\n"]
-    )
-    return response.choices[0].text.strip()
+# -----------------------------
+# EDA Code Generator
+# -----------------------------
+if option == "Generate EDA Code":
+    st.subheader("📊 Exploratory Data Analysis (EDA)")
+    if st.button("Generate EDA Code"):
+        with st.spinner("Generating EDA code..."):
+            result = chat_with_ai(
+                "You are a Python expert.",
+                "Write clean, well-commented Python code for Exploratory Data Analysis (EDA) using pandas and matplotlib."
+            )
+            st.code(result, language="python")
 
-def generate_interview_questions(language="Python"):
-    prompt = (
-        f"Generate a set of interview questions for {language} programming language."
-    )
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.7,
-        max_tokens=150,
-        stop=["\n\n"]
-    )
-    return response.choices[0].text.strip()
+# -----------------------------
+# Visualization Code Generator
+# -----------------------------
+elif option == "Generate Visualization Code":
+    st.subheader("📈 Data Visualization Code")
+    if st.button("Generate Visualization Code"):
+        with st.spinner("Generating visualization code..."):
+            result = chat_with_ai(
+                "You are a Data Visualization expert.",
+                "Generate Python code for data visualization using matplotlib and seaborn on a sample dataset. Include labeled plots and comments."
+            )
+            st.code(result, language="python")
 
-def generate_meeting_summary(notes):
-    prompt = (
-        f"Summarize the following meeting notes:\n{notes}\n\nSummary:"
-    )
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.3,
-        max_tokens=100,
-        stop=["\n\n"]
-    )
-    return response.choices[0].text.strip()
+# -----------------------------
+# Resume Summary Generator
+# -----------------------------
+elif option == "Generate Resume Summary":
+    st.subheader("🧠 Resume Summary Generator")
+    paragraph = st.text_area("Enter your experience or skillset paragraph:")
+    if st.button("Generate Summary"):
+        with st.spinner("Creating professional summary..."):
+            result = chat_with_ai(
+                "You are a resume writing assistant.",
+                f"Create a professional, ATS-friendly resume summary for a student or developer based on this:\n{paragraph}"
+            )
+            st.success("✨ Generated Resume Summary:")
+            st.write(result)
 
-if __name__ == "__main__":
-    # Example usage
-    
-    print("=== EDA Code ===")
-    print(generate_code_for_eda())
-    print("\n=== Visualization Code ===")
-    print(generate_code_for_visualization())
-    
-    experience = ("I am a 3rd year B.Tech CSE student, proficient in Java and Python (my main programming language), with a growing interest in Machine Learning and Web Development.")
-    print("\n=== Resume Summary ===")
-    print(generate_resume(experience))
-    
-    print("\n=== Interview Questions (Python) ===")
-    print(generate_interview_questions("Python"))
-    
-    meeting_notes = """Max: Profits up 50%
-Ruby: New servers are online
-Kyle: Need more time to fix software
-Walker: Happy to help
-Parkman: Beta testing almost done"""
-    print("\n=== Meeting Summary ===")
-    print(generate_meeting_summary(meeting_notes))
+# -----------------------------
+# Interview Questions Generator
+# -----------------------------
+elif option == "Generate Interview Questions":
+    st.subheader("💻 Interview Question Generator")
+    lang = st.text_input("Enter a programming language:", "Python")
+    if st.button("Generate Questions"):
+        with st.spinner(f"Generating {lang} interview questions..."):
+            result = chat_with_ai(
+                "You are a technical interviewer.",
+                f"Generate 10 technical interview questions for {lang}, mixing theory and coding-based ones."
+            )
+            st.write(result)
+
+# -----------------------------
+# Meeting Summary Generator
+# -----------------------------
+elif option == "Generate Meeting Summary":
+    st.subheader("📋 Meeting Summary Generator")
+    notes = st.text_area("Paste meeting notes below:")
+    if st.button("Summarize Notes"):
+        with st.spinner("Summarizing meeting notes..."):
+            result = chat_with_ai(
+                "You are a professional meeting summarizer.",
+                f"Summarize these meeting notes into 5 concise bullet points:\n{notes}"
+            )
+            st.success("📝 Meeting Summary:")
+            st.write(result)
